@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon site Docker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5a);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 220px;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
+        .close,
+        .prev,
+        .next {
+            position: absolute;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .close {
+            top: 20px;
+            right: 40px;
+            font-size: 50px;
+        }
+
+        .prev {
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+        }
+
+        .next {
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Bienvenue sur mon site Docker</h1>
+    <p>Voici mes images Docker :</p>
+
+    <div class="gallery">
+        <img src="images/photo1.jpg" onclick="openLightbox(0)">
+        <img src="images/photo2.jpg" onclick="openLightbox(1)">
+        <img src="images/photo3.jpg" onclick="openLightbox(2)">
+        <img src="images/photo4.jpg" onclick="openLightbox(3)">
+        <img src="images/photo5.jpg" onclick="openLightbox(4)">
+        <img src="images/photo6.jpg" onclick="openLightbox(5)">
+        <img src="images/photo7.jpg" onclick="openLightbox(6)">
+        <img src="images/photo8.jpg" onclick="openLightbox(7)">
+        <img src="images/photo9.jpg" onclick="openLightbox(8)">
+        <img src="images/photo10.jpg" onclick="openLightbox(9)">
+        <img src="images/photo11.jpg" onclick="openLightbox(10)">
+        <img src="images/photo12.jpg" onclick="openLightbox(11)">
+        <img src="images/photo13.jpg" onclick="openLightbox(12)">
+        <img src="images/photo14.jpg" onclick="openLightbox(13)">
+        <img src="images/photo15.jpg" onclick="openLightbox(14)">
+        <img src="images/photo16.jpg" onclick="openLightbox(15)">
+        <img src="images/photo17.jpg" onclick="openLightbox(16)">
+        <img src="images/photo18.jpg" onclick="openLightbox(17)">
+        <img src="images/photo19.jpg" onclick="openLightbox(18)">
+        <img src="images/photo20.jpg" onclick="openLightbox(19)">
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" onclick="closeLightbox()">×</span>
+        <span class="prev" onclick="changeImage(-1)">❮</span>
+        <img id="lightbox-img" src="" alt="Image">
+        <span class="next" onclick="changeImage(1)">❯</span>
+    </div>
+
+    <script>
+        const images = [
+            "images/photo1.jpg",
+            "images/photo2.jpg",
+            "images/photo3.jpg",
+            "images/photo4.jpg",
+            "images/photo5.jpg",
+            "images/photo6.jpg",
+            "images/photo7.jpg",
+            "images/photo8.jpg",
+            "images/photo9.jpg",
+            "images/photo10.jpg",
+            "images/photo11.jpg",
+            "images/photo12.jpg",
+            "images/photo13.jpg",
+            "images/photo14.jpg",
+            "images/photo15.jpg",
+            "images/photo16.jpg",
+            "images/photo17.jpg",
+            "images/photo18.jpg",
+            "images/photo19.jpg",
+            "images/photo20.jpg"
+        ];
+
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            document.getElementById("lightbox-img").src = images[currentIndex];
+            document.getElementById("lightbox").style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+
+        function changeImage(direction) {
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            document.getElementById("lightbox-img").src = images[currentIndex];
+        }
+    </script>
+
+</body>
+</html>
